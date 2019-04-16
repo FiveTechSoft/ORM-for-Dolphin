@@ -37,7 +37,7 @@ METHOD New( oConnection, cTableName ) CLASS Users
 
    ::Super:New( oConnection, cTableName )
    
-   ::_Invoices = Invoices():New( oConnection, "invoices" )
+   ::_Invoices = Invoices():New( oConnection, "invoices" ) // tableName
    
 return Self
 
@@ -64,7 +64,7 @@ METHOD New( oConnection, cTableName ) CLASS Invoices
 
    ::Super:New( oConnection, cTableName )
    
-   ::_Items = Items():New( oConnection, "items" )
+   ::_Items = Items():New( oConnection, "items" )   // tableName
    
 return Self
 
