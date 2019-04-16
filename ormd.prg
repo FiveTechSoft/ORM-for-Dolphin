@@ -93,6 +93,7 @@ CLASS HbModel
    METHOD Count() INLINE ::oRs:RecCount()
    METHOD Where( cFieldName, uValue )
    METHOD First() INLINE ( ::oRs:GoTop(), Self )
+   METHOD Last() INLINE ( ::oRs:GoBottom(), Self )
    
 ENDCLASS
 
