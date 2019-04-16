@@ -87,7 +87,7 @@ CLASS HbModel
    METHOD New( oConnection, cTableName )
    
    METHOD Count() INLINE ::oRs:RecCount()
-   METHOD Where( cFieldName, nId )
+   METHOD Where( cFieldName, uValue )
    METHOD First() INLINE ( ::oRs:GoTop(), Self )
    
 ENDCLASS
@@ -105,10 +105,10 @@ return Self
 
 //----------------------------------------------------------------------------//
 
-METHOD Where( cFieldName, nId ) CLASS HbModel
+METHOD Where( cFieldName, uValue ) CLASS HbModel
 
    ::oRs := ::oConnection:Query( "SELECT * FROM " + ::cTableName + ;
-                                 " WHERE " + cFieldName + "=" + AllTrim( Str( nId ) ) )
+                                 " WHERE " + cFieldName + "=" + ClipValue2SQL( uValue ) )
 
 return Self
                                      
