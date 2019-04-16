@@ -20,7 +20,8 @@ function Main()
    for n = 1 to oUsers:Invoices:Count()
       ? "   Invoice id: " + Str( oUsers:Invoices:oRs:id )
          for m = 1 to oUsers:Invoices:Items:Count()
-            ? "      Item " + AllTrim( Str( m ) ) + ": " + AllTrim( oUsers:Invoices:Items:oRs:Description )
+            ? "      Item " + AllTrim( Str( m ) ) + ": " + ;
+              AllTrim( oUsers:Invoices:Items:oRs:Description )
             oUsers:Invoices:Items:Next()
          next   
       oUsers:Invoices():Next()
