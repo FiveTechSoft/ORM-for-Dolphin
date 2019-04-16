@@ -19,7 +19,7 @@ return nil
 
 CLASS Users FROM HbModel
 
-   CLASSDATA _Invoices PROTECTED
+   DATA _Invoices PROTECTED
    
    METHOD New( oConnection, cTableName )
 
@@ -47,7 +47,7 @@ return ::_Invoices:Where( "user_id", ::oRs:Id )
 
 CLASS Invoices FROM HbModel
 
-   CLASSDATA _Items PROTECTED
+   DATA _Items PROTECTED
    
    METHOD New( oConnection, cTableName )
    METHOD Items()
