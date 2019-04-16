@@ -12,8 +12,15 @@ function Main()
                                            "fivetech_orm" )         // database
    local oUsers := Users():New( oConnection, "users" ) // tableName
    
+   ? "Number of invoices for: " + AllTrim( oUsers:oRs:FirstName ) + " " + ;
+                                  AllTrim( oUsers:oRs:LastName )
    ? oUsers:Invoices:Count()
-   ? oUsers:Invoices:Items:Count()
+   
+   for n = 1 to oUsers:Invoices:Count()
+      ? "Number of items for invoice: " + Str( oUsers:Invoices:oRs:Id )
+      ? oUsers:Invoices:Items:Count()
+      oUsers:Invoices:Next()
+   next   
 
    oConnection:End()
 
@@ -91,9 +98,11 @@ CLASS HbModel
    METHOD New( oConnection, cTableName )
    
    METHOD Count() INLINE ::oRs:RecCount()
+   METHOD Find( nId ) INLINE ( ::oRs:Seek( nId, "id" ), Self )
    METHOD Where( cFieldName, uValue )
    METHOD First() INLINE ( ::oRs:GoTop(), Self )
-   METHOD Last() INLINE ( ::oRs:GoBottom(), Self )
+   METHOD Next()  INLINE ( ::oRs:Skip( 1 ), Self )
+   METHOD Last()  INLINE ( ::oRs:GoBottom(), Self )
    
 ENDCLASS
 
