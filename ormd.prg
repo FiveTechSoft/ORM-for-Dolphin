@@ -11,15 +11,19 @@ function Main()
                                            3306,,;                  // port 
                                            "fivetech_orm" )         // database
    local oUsers := Users():New( oConnection, "users" ) // tableName
+   local n, m
    
    ? "Number of invoices for: " + AllTrim( oUsers:oRs:FirstName ) + " " + ;
-                                  AllTrim( oUsers:oRs:LastName )
-   ? oUsers:Invoices:Count()
+                                  AllTrim( oUsers:oRs:LastName ) + " --> " + ;
+                                  AllTrim( Str( oUsers:Invoices:Count() ) )
    
    for n = 1 to oUsers:Invoices:Count()
-      ? "Number of items for invoice: " + Str( oUsers:Invoices:oRs:Id )
-      ? oUsers:Invoices:Items:Count()
-      oUsers:Invoices:Next()
+      ? "   Invoice id: " + Str( oUsers:Invoices:oRs:id )
+         for m = 1 to oUsers:Invoices:Items:Count()
+            ? "      Item " + AllTrim( Str( m ) ) + ": " + AllTrim( oUsers:Invoices:Items:oRs:Description )
+            oUsers:Invoices:Items:Next()
+         next   
+      oUsers:Invoices():Next()
    next   
 
    oConnection:End()
@@ -30,7 +34,7 @@ return nil
 
 CLASS Users FROM HbModel
 
-   DATA _Invoices PROTECTED
+   DATA _Invoices        PROTECTED
    
    METHOD New( oConnection, cTableName )
 
@@ -52,7 +56,12 @@ return Self
 
 METHOD Invoices() CLASS Users
 
-return ::_Invoices:Where( "user_id", ::oRs:Id )
+   if ::nLastId != ::oRs:Id
+      ::nLastId = ::oRs:Id
+      ::_Invoices:Where( "user_id", ::oRs:Id )
+   endif
+
+return ::_Invoices
 
 //----------------------------------------------------------------------------//
 
@@ -79,7 +88,12 @@ return Self
 
 METHOD Items() CLASS Invoices
 
-return ::_Items:Where( "invoice_id", ::oRs:Id )
+   if ::nLastId != ::oRs:Id
+      ::nLastId = ::oRs:Id
+      ::_Items:Where( "invoice_id", ::oRs:Id )
+   endif
+
+return ::_Items
 
 //----------------------------------------------------------------------------//
 
@@ -94,6 +108,7 @@ CLASS HbModel
    DATA   oConnection 
    DATA   cTableName
    DATA   oRs
+   DATA   nLastId   INIT 0 PROTECTED
 
    METHOD New( oConnection, cTableName )
    
@@ -102,6 +117,7 @@ CLASS HbModel
    METHOD Where( cFieldName, uValue )
    METHOD First() INLINE ( ::oRs:GoTop(), Self )
    METHOD Next()  INLINE ( ::oRs:Skip( 1 ), Self )
+   METHOD Prev()  INLINE ( ::oRs:Skip( -1 ), Self )
    METHOD Last()  INLINE ( ::oRs:GoBottom(), Self )
    
 ENDCLASS
