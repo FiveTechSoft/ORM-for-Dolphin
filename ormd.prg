@@ -5,8 +5,12 @@
 
 function Main()
 
-   local oConnection := TDolphinSrv():New( "www.fivetechsoft.com", "fivetech_orm", "hborm", 3306,, "fivetech_orm" )
-   local oUsers := Users():New( oConnection, "users" )
+   local oConnection := TDolphinSrv():New( "www.fivetechsoft.com",; // server
+                                           "fivetech_orm",;         // username 
+                                           "hborm",;                // password 
+                                           3306,,;                  // port 
+                                           "fivetech_orm" )         // database
+   local oUsers := Users():New( oConnection, "users" ) // tableName
    
    ? oUsers:Invoices:Count()
    ? oUsers:Invoices:Items:Count()
