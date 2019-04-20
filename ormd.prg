@@ -157,7 +157,7 @@ METHOD OrderBy( cFieldName, lDescent ) CLASS HbModel
       lDescent = .F.
    endif   
 
-   ::oRs:SetOrder( cFieldName + If( ! lDescent, " ASC", "DESC" ), .T. )
+   ::oRs:SetOrder( cFieldName + If( ! lDescent, " ASC", " DESC" ), .T. )
    
 return Self
 
