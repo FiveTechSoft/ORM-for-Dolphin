@@ -13,6 +13,11 @@ function Main()
    local oUsers := Users():New( oConnection, "users" ) // tableName
    local n, m
    
+   for n = 1 to oUsers:OrderBy( "lastname" ):Count()
+      ? oUsers:oRs:LastName
+      oUsers:Next()
+   next   
+   
    ? "Number of invoices for: " + AllTrim( oUsers:oRs:FirstName ) + " " + ;
                                   AllTrim( oUsers:oRs:LastName ) + " --> " + ;
                                   AllTrim( Str( oUsers:Invoices:Count() ) )
@@ -120,6 +125,7 @@ CLASS HbModel
    METHOD Next()  INLINE ( ::oRs:Skip( 1 ), Self )
    METHOD Prev()  INLINE ( ::oRs:Skip( -1 ), Self )
    METHOD Last()  INLINE ( ::oRs:GoBottom(), Self )
+   METHOD OrderBy( cFieldName, lDescent ) 
    
 ENDCLASS
 
@@ -145,3 +151,14 @@ return Self
                                      
 //----------------------------------------------------------------------------//
       
+METHOD OrderBy( cFieldName, lDescent ) CLASS HbModel
+
+   if lDescent == nil
+      lDescent = .F.
+   endif   
+
+   ::oRs:SetOrder( cFieldName + If( ! lDescent, " ASC", "DESC" ), .T. )
+   
+return Self
+
+//----------------------------------------------------------------------------//
