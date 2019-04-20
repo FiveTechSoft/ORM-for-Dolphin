@@ -1,4 +1,4 @@
-[![](https://github.com/fivetechsoft/ORM-for-Dolphin/images/Dolphin.png)](http://tdolphin.blogspot.com/ "Class TDolphin")
+[![](https://github.com/FiveTechSoft/ORM-for-Dolphin/blob/master/images/Dolphin.png)](http://tdolphin.blogspot.com/ "Class TDolphin")
 
 # ORM-for-Dolphin
 Simple to understand prototype to implement an ORM using Harbour and Dolphin
