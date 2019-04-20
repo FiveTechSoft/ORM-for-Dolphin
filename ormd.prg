@@ -126,6 +126,7 @@ CLASS HbModel
    METHOD Prev()  INLINE ( ::oRs:Skip( -1 ), Self )
    METHOD Last()  INLINE ( ::oRs:GoBottom(), Self )
    METHOD OrderBy( cFieldName, lDescent ) 
+   METHOD Sql()   INLINE ::oRs:cQuery
    
 ENDCLASS
 
