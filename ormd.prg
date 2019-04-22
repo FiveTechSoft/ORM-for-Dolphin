@@ -171,14 +171,14 @@ return Self
 
 METHOD Sum( cFieldName ) CLASS HbModel
 
-   local cOldQuery := ::oRs:cQuery, nResult
+   local oOldRs := ::oRs, nResult
    
    ::oRs := ::oConnection:Query( "SELECT SUM(" + cFieldName + ") " + ;
             SubStr( ::oRs:cQuery, At( "FROM", ::oRs:cQuery ) ) )
             
    nResult = If( ::oRs:RecCount() > 0, ::oRs:FieldGet( 1 ), 0 )
    
-   ::oRs = ::oConnection:Query( cOldQuery )
+   ::oRs = oOldRs
 
 return nResult
                                      
