@@ -6,7 +6,7 @@
 function Main()
 
    local oConnection := TDolphinSrv():New( "www.fivetechsoft.com",; // server
-                                           "fivetech_orm",;         // username 
+											"fivetech_orm",;         // username 
                                            "hborm",;                // password 
                                            3306,,;                  // port 
                                            "fivetech_orm" )         // database
@@ -150,8 +150,7 @@ return Self
 
 METHOD Where( cFieldName, uValue ) CLASS HbModel
 
-   ::oRs := ::oConnection:Query( "SELECT * FROM " + ::cTableName + ;
-                                 " WHERE " + cFieldName + "=" + ClipValue2SQL( uValue ) )
+   ::oRs:SetWhere( cFieldName + "=" + ClipValue2SQL( uValue ) )	
 
 return Self
                                      
