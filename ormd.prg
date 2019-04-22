@@ -13,14 +13,12 @@ function Main()
    local oUsers := Users():New( oConnection, "users" ) // tableName
    local n, m
    
-   /*
    for n = 1 to oUsers:OrderBy( "lastname" ):Count()
       ? oUsers:oRs:LastName
       oUsers:Next()
    next
-   */
-   
-   ? oUsers:First:Invoices:Sum( "amount" )
+
+   ? oUsers:Find( 1 ):Invoices:Sum( "amount" )
    
    ? "Number of invoices for: " + AllTrim( oUsers:oRs:FirstName ) + " " + ;
                                   AllTrim( oUsers:oRs:LastName ) + " --> " + ;
