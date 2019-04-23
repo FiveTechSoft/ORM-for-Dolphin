@@ -148,8 +148,7 @@ return Self
 
 METHOD Where( cFieldName, uValue ) CLASS HbModel
 
-   ::oRs := ::oConnection:Query( "SELECT * FROM " + ::cTableName + ;
-                                 " WHERE " + cFieldName + "=" + ClipValue2SQL( uValue ) )
+   ::oRs:SetWhere( cFieldName + "=" + ClipValue2SQL( uValue ) )	
 
 return Self
                                      
