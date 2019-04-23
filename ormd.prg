@@ -121,7 +121,7 @@ CLASS HbModel
    METHOD New( oConnection, cTableName )
    
    METHOD Count() INLINE ::oRs:RecCount()
-   METHOD Find( nId ) INLINE ( ::oRs:Seek( nId, "id" ), Self )
+   METHOD Find( nId ) INLINE ( ::oRs:Find( { nId }, { "id" } ), Self )
    METHOD Where( cFieldName, uValue )
    METHOD First() INLINE ( ::oRs:GoTop(), Self )
    METHOD Next()  INLINE ( ::oRs:Skip( 1 ), Self )
